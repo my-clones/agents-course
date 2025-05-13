@@ -131,7 +131,7 @@ This is what's behind models like `Deepseek R1` or `OpenAI's o1`, which have bee
 
 ### Action: 
 
-> Enabling the Agent to Engage with Its Environment
+> Enabling the Agent to Engage (interact) with Its Environment
 
 #### Types of Agent Actions
 There are multiple types of Agents that take actions differently:
@@ -194,3 +194,56 @@ Adavantages:
 This method also follows the `stop and parse approach` by clearly delimiting the code block and signaling when execution is complete.
 
 Actions **<u>bridge</u>** (connect) an **agent’s internal reasoning** and **its real-world interactions** by executing clear, structured tasks — whether through `JSON`, `code`, or `function calls`.
+
+
+## Observe
+
+> Integrating Feedback to Reflect and Adapt (perceive the consequences/output of its actions)
+
+👉 source: [hf: observations](https://huggingface.co/learn/agents-course/unit1/observations)
+
+Observations are **signals** from the **environment** 
+— whether it’s `data` from an API, `error messages`, or system `logs` 
+— that guide the next cycle of thought.
+
+---
+
+```mermaid
+flowchart LR
+    A[User]:::noteStyle
+    B[Thought]
+    C[Action]
+    D[Observe]:::excelStyle
+    E[User]:::noteStyle
+    F[Env: Tool/Action]:::envStyle
+
+    A--> B --> C --> |interact with| F --signals--> D --> E
+    D -.->|results| B
+
+
+    classDef noteStyle fill:#fff5c2,stroke:#333,stroke-dasharray: 5 5;
+    classDef envStyle fill:#89ffdb,stroke:#333,stroke-dasharray: 5 5;
+    classDef excelStyle fill:#c0a8f7,stroke:#976bfe,stroke-width:3px;
+```
+
+---
+
+👉 In the observation phase, the agent:
+
+* **Collects Feedback**: Receives data or confirmation that its action was successful (or not).
+* **Appends Results**: Integrates the new information into its existing context, effectively updating its memory.
+* **Adapts its Strategy**: Uses this updated context to refine subsequent thoughts and actions.
+
+👉  The Agent then uses it to decide whether:
+* **additional information is needed** or 
+* **it’s ready to provide a final answer**.
+
+This **iterative incorporation of feedback** ensures the agent **remains dynamically aligned with its goals**, <u>constantly learning and adjusting based on real-world outcomes</u>.
+
+### Type of Observation
+
+* **System Feedback**: Error messages, success notifications, status codes
+* **Data Changes**: Database updates, file system modifications, state changes
+* **Environmental**: Data	Sensor readings, system metrics, resource usage
+* **Response Analysis**: API responses, query results, computation outputs
+* **Time-based**: Events	Deadlines reached, scheduled tasks completed
