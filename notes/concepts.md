@@ -128,7 +128,7 @@ The principle of an LLM is simple, yet effective:
 **its objective is to predict the next token, given a sequence of previous tokens.**
 
 * A “token” is the unit of information an LLM works with. 
-* You can think of a “token” as if it was a “word”, but for efficiency reasons LLMs don’t use whole words.
+* You can think of a “token” as if it was a “word”, but for efficiency reasons LLMs don't use whole words.
 * Each LLM has some special tokens specific to the model.
 * The most important of those is the End of sequence token (EOS).
 
@@ -141,4 +141,40 @@ How It Works in Brief:
 	2.	The model computes probabilities for the next token based on this context.
 	3.	A decoding strategy (e.g., picking the highest probability) selects the next token.
 	4.	This repeats until the model outputs EOS, signaling completion.
+
+
+
+Decoding strategy
+
+* **Greedy decoding**: Always pick the token with the highest probability.
+* **Beam search**: Explore multiple candidate sequences and pick the one with the highest total score.
+* **Sampling**: Randomly sample tokens from the probability distribution.
+* **Top-k sampling**: Randomly sample tokens from the top-k most likely tokens.
+
+Attention
+
+This process of identifying the most relevant words to predict the next token has proven to be incredibly effective.
+
+## Messages to Template
+
+The easiest way to ensure your LLM receives a conversation correctly formatted is to use the chat_template from the model’s tokenizer.
+
+```python
+messages = [
+    {"role": "system", "content": "You are an AI assistant with access to various tools."},
+    {"role": "user", "content": "Hi !"},
+    {"role": "assistant", "content": "Hi human, what can help you with ?"},
+]
+```
+
+To convert the previous conversation into a prompt, we load the tokenizer and call apply_chat_template:
+
+```python
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("HuggingFaceTB/SmolLM2-1.7B-Instruct")
+rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)      
+```
+
+The rendered_prompt returned by this function is now ready to use as the input for the model you chose!
 
