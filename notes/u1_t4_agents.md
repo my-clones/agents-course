@@ -1,8 +1,6 @@
 # Agent workflow: 
 
-Understanding AI Agents through the Thought-Action-Observation Cycle
-
-> **I Agent Workflow, a cycle we defined as Thought-Action-Observation.**
+> **Agent Workflow, a cycle we defined as Thought-Action-Observation.**
 
 <!--![](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AgentCycle.gif)-->
 
@@ -20,11 +18,14 @@ Let’s break down these actions together:
 
 ![image.png](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/system_prompt_cycle.png)
 
-We see here that in the System Message we defined :
+In the System Message we can define the following:
 
 * The Agent’s behavior.
 * The Tools our Agent has access to, as we described in the previous section.
 * The Thought-Action-Observation Cycle, that we bake into the LLM instructions.
+
+```python
+```
 
 ---
 
@@ -32,51 +33,9 @@ We see here that in the System Message we defined :
 
 Let’s take a small example to understand the process before going deeper into each step of the process:
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Alfred (agent)
-    participant WeatherAPI (tool)
-
-    User ->> Alfred (agent): What’s the weather in New York?
-
-    Note right of Alfred (agent): Thought: I need to fetch weather data for New York.
-
-    Alfred (agent) ->> WeatherAPI (tool): Call get_weather({"location": "New York"})
-
-    WeatherAPI (tool) -->> Alfred (agent): "Partly cloudy, 15°C, 60% humidity"
-
-    Note right of Alfred (agent): Observation: Weather data received.
-
-    Note right of Alfred (agent): Updated Thought: I can now answer the user.
-
-    Alfred (agent) ->> User: "The weather in New York is partly cloudy, 15°C, 60% humidity."
-```
-
+***REVIEW THE MERMAID FLOW - PROCESS***
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant Alfred_Thought as "Alfred (Thought)"
-    participant Alfred_Action as "Alfred (Action)"
-    participant Alfred_Observation as "Alfred (Observation)"
-    participant WeatherAPI
-
-    User ->> Alfred_Thought: What's the weather in New York?
-    Note right of Alfred_Thought: "I need to fetch weather data for New York."
-
-    Alfred_Thought ->> Alfred_Action: Prepare get_weather request for "New York"
-
-    Alfred_Action ->> WeatherAPI: Call get_weather({"location": "New York"})
-    WeatherAPI -->> Alfred_Observation: "Partly cloudy, 15°C, 60% humidity"
-
-    Note right of Alfred_Observation: Received weather data.
-
-    Alfred_Observation ->> Alfred_Thought: Provide observation feedback
-
-    Note right of Alfred_Thought: "I can now answer the user."
-
-    Alfred_Thought ->> User: "The weather in New York is partly cloudy, 15°C, 60% humidity."
 ```
 
 ---
@@ -97,8 +56,13 @@ Each cycle allows the agent to incorporate fresh information (observations) into
 
 ## ReAct
 
-**ReAct cycle:** 
-> the interplay (interaction) of `Thought`, `Action`, and Observation empowers AI agents to solve complex tasks iteratively
+The **`ReAct`** approach, a prompting technique that encourages the model to think "step by step" before **`acting`** and before allowing **`LLM`** to decode the next tokens for the final answer.
+
+When LLM is guided to think "step by step", encouraging a decoding process towards the next tokens that generate a **plan**, rather than a **final solution**, since the `LLM` is encouraged to decompose the problem into subtasks before.
+
+> 🔄 **ReAct cycle:** 
+> the interplay (interaction) of `Thought`, `Action`, and `Observation` empowers AI agents to solve complex tasks iteratively
+
 ```mermaid
 flowchart LR
     A[User]:::noteStyle
@@ -113,25 +77,35 @@ flowchart LR
     classDef noteStyle fill:#fff5c2,stroke:#333,stroke-dasharray: 5 5;
 ```
 
-> By understanding and applying these principles, you can design agents that not only reason about their tasks but also effectively utilize external tools to complete them
->
-
-### Thought: 
-
-> Internal Reasoning and the ReAct Approach
-
-✴️ **ReAct** approach
-A prompting technique that encourages the model **to think <i>“step by step”</i> before acting**.
-Let’s think step by step” before letting the LLM decode the next tokens, which in general leads to less errors than trying to generate the final solution directly.
-
-A key method is the **ReAct** approach, which is the concatenation of “Reasoning” (`Think`) with “Acting” (`Act`).
-
 🔶 We have recently seen a lot of interest for reasoning strategies. 
 This is what's behind models like `Deepseek R1` or `OpenAI's o1`, which have been **fine-tuned** to **"think before answering"**.
 
+These models have been trained to always include specific `thought chunks`, enclosed in special tokens like **`<think>`** ... **`<\think>`**.
+
+This is not just a prompting technique like ReAct, **but a training method where the model learns to generate these chunks** after analyzing thousands of examples that show what we expect it to do.
+
+
+### Thought: 
+
+> 🧠 **Internal Reasoning of the Agent**
+
+**Type of Thought	(examples):**
+
+| Type | Desc |
+|---|---|
+| **Planning**	| “I need to break this task into three steps: 1) gather data, 2) analyze trends, 3) generate report” | |
+| **Analysis** | “Based on the error message, the issue appears to be with the database connection parameters” |
+| **Decision Making** | “Given the user’s budget constraints, I should recommend the mid-tier option” |
+| **Problem Solving** | “To optimize this code, I should first profile it to identify bottlenecks” |
+| **Memory Integration** | “The user mentioned their preference for Python earlier, so I’ll provide examples in Python” |
+| **Self-Reflection** | “My last approach didn’t work well, I should try a different strategy” |
+| **Goal Setting** | “To complete this task, I need to first establish the acceptance criteria” |
+| **Prioritization** | “The security vulnerability should be addressed before adding new features” |
+
+
 ### Action: 
 
-> Enabling the Agent to Engage (interact) with Its Environment
+> ▶️ **How the Agent to Engage (interact) with Its Environment**
 
 #### Types of Agent Actions
 There are multiple types of Agents that take actions differently:
@@ -198,7 +172,7 @@ Actions **<u>bridge</u>** (connect) an **agent’s internal reasoning** and **it
 
 ## Observe
 
-> Integrating Feedback to Reflect and Adapt (perceive the consequences/output of its actions)
+> Integrating Feedback to Reflect and Adapt (perceive the results of its actions)
 
 👉 source: [hf: observations](https://huggingface.co/learn/agents-course/unit1/observations)
 
