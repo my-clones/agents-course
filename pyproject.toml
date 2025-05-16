@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "duckduckgo-search>=8.0.2",
     "gradio-client>=1.10.0",
     "ipykernel>=6.29.5",
     "smolagents>=1.15.0",

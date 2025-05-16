@@ -84,6 +84,7 @@ These models have been trained to always include specific `thought chunks`, encl
 
 This is not just a prompting technique like ReAct, **but a training method where the model learns to generate these chunks** after analyzing thousands of examples that show what we expect it to do.
 
+---
 
 ### Thought: 
 
@@ -102,16 +103,19 @@ This is not just a prompting technique like ReAct, **but a training method where
 | **Goal Setting** | “To complete this task, I need to first establish the acceptance criteria” |
 | **Prioritization** | “The security vulnerability should be addressed before adding new features” |
 
+---
 
 ### Action: 
 
-> ▶️ **How the Agent to Engage (interact) with Its Environment**
+> ▶️ **How the Agent engages (interacts) with its environment**
 
-#### Types of Agent Actions
+Actions represent the decisions and actions taken by the agent to achieve a goal.
+
+#### Types of `Agent` Actions
 There are multiple types of Agents that take actions differently:
-•	**`JSON`Agent**: The Action to take is specified in JSON format.
-•	**`Code` Agent**: The Agent writes a code block that is interpreted externally.
-•	**`Function-calling` Agent**: It is a subcategory of the `JSON` Agent which has been fine-tuned to generate a new message for each action.
+* **`JSON`Agent**: The Action to take is specified in JSON format.
+* **`Code` Agent**: The Agent writes a code block that is interpreted externally.
+* **`Function-calling` Agent**: It is a subcategory of the `JSON` Agent which has been fine-tuned to generate a new message for each action.
 
 ![alt text](image-2.png)
 
@@ -122,9 +126,16 @@ There are multiple types of Agents that take actions differently:
 * **Environment Interaction**: controlling: interfaces or physical devices.
 * **Communication**: chat or collaborating with other agent
 
-#### Json Agent
+#### Actions themselves can serve many purposes:
 
-**The Stop and Parse Approach**
+* **Information Gathering**: performing web searches, querying databases, or retrieving documents.
+* **Tool Usage** making API calls, running calculations, and executing code.
+* **Environment interaction**	manipulating digital interfaces or controlling physical devices.
+* **Communication**	engaging with users via chat or collaborating with other agents.
+* **MCP Servers**: connecting with external tools, data sources, and applications.
+* **Memory access**: storing and retrieving information from memory (RAG systems).
+
+#### The Stop and Parse Approach**
 
 This method ensures that the agent’s output is structured and predictable:
 
