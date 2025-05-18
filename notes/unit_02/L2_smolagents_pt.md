@@ -43,7 +43,7 @@ Em vez de gerar *`JSON`* ou *`text`*, esses agentes **produzem código `Python`*
 > o smolagents se concentra em chamadas de ferramentas no código, simplificando o processo de execução, podendo chamara execução do código diretamente.
 
 
-**3️⃣ ToolCallingAgents**
+**2️⃣ ToolCallingAgents**
 
 `ToolCallingAgents` são o segundo tipo de agente suportado por smolagents. 
 
@@ -51,7 +51,7 @@ Em vez de gerar *`JSON`* ou *`text`*, esses agentes **produzem código `Python`*
 
 Esses agentes dependem de `JSON/blobs` de texto que o sistema deve analisar e interpretar para executar ações.
 
-**4️⃣ *Tools* (Ferramentas)**
+**3️⃣ *Tools* (Ferramentas)**
 
 Ferramentas são `funções` que um `LLM` pode usar em um `agentic system` e atuam como blocos de construção essenciais para o comportamento do agente. 
 
@@ -62,7 +62,7 @@ Ver como:
 * **compartilhar** `ferramentas` com a comunidade, e 
 * **carregar** `ferramentas` contribuídas pela comunidade para uso em seus agentes.
 
-**5️⃣ RetrievalAgents**
+**4️⃣ RetrievalAgents**
 
 > ***Agentes de recuperação*** permitem que modelos **acessem bases de conhecimento** 
 
@@ -72,13 +72,13 @@ Ver como:
 * implementam **técnicas avançadas de *Information Retrieval*** para aumentar a robustez do sistema, incluindo políticas de **fallback** que garantem continuidade mesmo em cenários de falha parcial ou ausência de resultados relevantes.
 
 
-**6️⃣ Multi-Agent Systems**
+**5️⃣ Multi-Agent Systems**
 
 > Orquestrar múltiplos agentes de forma eficaz é crucial para a construção de sistemas multiagentes mais poderosos. 
 
 Combinar agentes com diferentes capacidades — como um agente de busca na web com um agente de execução de código — você pode criar soluções mais sofisticadas. 
 
-**7️⃣ Vision and Browser agents**
+**6️⃣ Vision and Browser agents**
 
 Os agentes de visão ampliam as capacidades tradicionais dos agentes, incorporando Modelos de Visão e Linguagem (VLMs), permitindo que processem e interpretem informações visuais.
 
